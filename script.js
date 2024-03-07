@@ -5,7 +5,8 @@
     day = hour * 24,
     week = day * 7;
   const periodStart = new Date("2024-03-02T00:00:00Z").getTime();
-  const periodEnd = new Date(periodStart + 12 * week + 2 * day);
+  var periodEnd = new Date(periodStart);
+  periodEnd.setDate(periodEnd.getDate() + 84);
   const countDown = new Date(periodEnd).getTime();
 
   //I'm adding this section so I don't have to keep updating this pen every year :-)
@@ -31,11 +32,16 @@
     const weeksRemaining = Math.floor(daysRemaining / 7);
     const currentWeek = 12 - weeksRemaining;
 
-    (document.getElementById("headline").innerText = periodEnd),
-      (document.getElementById("currentWeek").innerText =
-        Math.ceil(currentWeek)),
-      (document.getElementById("weeksRemaining").innerText = weeksRemaining),
-      (document.getElementById("days").innerText = daysRemaining);
+    document.getElementById("headline").innerText =
+      periodEnd.getMonth() +
+      1 +
+      "/" +
+      periodEnd.getDate() +
+      "/" +
+      periodEnd.getFullYear();
+    document.getElementById("currentWeek").innerText = Math.ceil(currentWeek);
+    document.getElementById("weeksRemaining").innerText = weeksRemaining;
+    document.getElementById("days").innerText = daysRemaining;
 
     //do something later when date is reached
     if (distance < 0) {
