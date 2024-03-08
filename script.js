@@ -5,7 +5,7 @@
   const day = hour * 24;
   // const week = day * 7;
 
-  const periodStart = new Date("03/21/2024");
+  const periodStart = new Date("03/11/2024");
   const startMonth = String(periodStart.getMonth() + 1).padStart(2, "0");
   const startDate = String(periodStart.getDate()).padStart(2, "0");
   const startYear = periodStart.getFullYear();
