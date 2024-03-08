@@ -1,55 +1,34 @@
 (function () {
-  const second = 1000,
-    minute = second * 60,
-    hour = minute * 60,
-    day = hour * 24,
-    week = day * 7;
-  const periodStart = new Date("2024-03-02T00:00:00Z").getTime();
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+  // const week = day * 7;
+
+  const periodStart = new Date("03/21/2024");
+  const startMonth = String(periodStart.getMonth() + 1).padStart(2, "0");
+  const startDate = String(periodStart.getDate()).padStart(2, "0");
+  const startYear = periodStart.getFullYear();
+  const displayStartDate = startMonth + "/" + startDate + "/" + startYear;
+
   var periodEnd = new Date(periodStart);
-  periodEnd.setDate(periodEnd.getDate() + 84);
-  const countDown = new Date(periodEnd).getTime();
-
-  //I'm adding this section so I don't have to keep updating this pen every year :-)
-  //remove this if you don't need it
-  let today = new Date(),
-    dd = String(today.getDate()).padStart(2, "0"),
-    mm = String(today.getMonth() + 1).padStart(2, "0"),
-    yyyy = today.getFullYear(),
-    nextYear = yyyy + 1,
-    dayMonth = "09/30/",
-    birthday = dayMonth + yyyy;
-
-  today = mm + "/" + dd + "/" + yyyy;
-  if (today > birthday) {
-    birthday = dayMonth + nextYear;
-  }
-  //end
+  periodEnd.setDate(periodEnd.getDate() + 83);
+  const endMonth = String(periodEnd.getMonth() + 1).padStart(2, "0");
+  const endDate = String(periodEnd.getDate()).padStart(2, "0");
+  const endYear = periodEnd.getFullYear();
+  const displayEndDate = endMonth + "/" + endDate + "/" + endYear;
 
   const x = setInterval(function () {
-    const now = new Date().getTime();
-    const distance = periodEnd - now;
-    const daysRemaining = Math.floor(distance / day);
+    const now = new Date();
+    // const distance = periodEnd - now;
+    const daysRemaining = Math.ceil((periodEnd - now) / day);
     const weeksRemaining = Math.floor(daysRemaining / 7);
     const currentWeek = 12 - weeksRemaining;
 
     document.getElementById("headline").innerText =
-      periodEnd.getMonth() +
-      1 +
-      "/" +
-      periodEnd.getDate() +
-      "/" +
-      periodEnd.getFullYear();
+      displayStartDate + " - " + displayEndDate;
     document.getElementById("currentWeek").innerText = Math.ceil(currentWeek);
     document.getElementById("weeksRemaining").innerText = weeksRemaining;
     document.getElementById("days").innerText = daysRemaining;
-
-    //do something later when date is reached
-    if (distance < 0) {
-      document.getElementById("headline").innerText = "It's my birthday!";
-      document.getElementById("countdown").style.display = "none";
-      document.getElementById("content").style.display = "block";
-      clearInterval(x);
-    }
-    //seconds
   }, 0);
 })();
